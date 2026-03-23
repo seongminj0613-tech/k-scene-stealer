@@ -47,9 +47,10 @@ busan-travel-recommender/
 
 ```bash
 cd backend
+python -m venv venv
 .\venv\Scripts\Activate.ps1
+pip install fastapi uvicorn pydantic
 uvicorn main:app --reload
-
 
 ### Frontend 실행
 
