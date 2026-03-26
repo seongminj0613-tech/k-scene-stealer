@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models import RecommendationRequest
-from recommender import recommend_places
+from backend.models import RecommendationRequest
+from backend.recommender import recommend_places
 
 app = FastAPI()
 

@@ -1,11 +1,11 @@
+from pathlib import Path
 import json
-import os
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+data_path = BASE_DIR / "data" / "places.json"
 
 
 def load_places():
-    current_dir = os.path.dirname(__file__)
-    data_path = os.path.join(current_dir, "..", "data", "places.json")
-
     with open(data_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
