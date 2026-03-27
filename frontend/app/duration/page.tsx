@@ -1,96 +1,87 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-
-const durationOptions = [
-  'Half day',
-  'One day trip',
-  '1 night, 2 days',
-  '2 nights, 3 days or more'
-];
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function DurationPage() {
   const router = useRouter();
+  const [selectedDuration, setSelectedDuration] = useState<string>("");
 
-  const handleSelectDuration = (duration: string) => {
-    localStorage.setItem('selectedDuration', duration);
-    router.push('/style');
+  const durations = [
+    "Half day",
+    "One day trip",
+    "1 night, 2 days",
+    "2 nights, 3 days or more",
+  ];
+
+  const handleBack = () => {
+    router.push("/preferences"); 
+  };
+
+  const handleNext = () => {
+    if (!selectedDuration) return;
+
+    localStorage.setItem("duration", selectedDuration);
+    router.push("/style"); // 또는 /preferences
   };
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        background:
-          'linear-gradient(180deg, #020617 0%, #000000 100%)',
-        color: 'white',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '24px',
-      }}
-    >
-      <section
-        style={{
-          width: '100%',
-          maxWidth: '560px',
-          backgroundColor: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: '24px',
-          padding: '32px',
-          backdropFilter: 'blur(10px)',
-          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.45)',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '28px',
-            fontWeight: 700,
-            marginBottom: '12px',
-            lineHeight: 1.3,
-          }}
-        >
-          How long will you stay in Busan?
-        </h1>
+    <main className="min-h-screen bg-black px-6 py-10 text-white">
+      <div className="mx-auto flex min-h-[80vh] max-w-3xl items-center justify-center">
+        <div className="w-full rounded-[28px] border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-sm">
+          <h1 className="text-4xl font-bold tracking-tight">
+            How long will you stay in Busan?
+          </h1>
+          <p className="mt-3 text-sm text-gray-400">
+            Select your travel duration and we’ll recommend a course that fits
+            your schedule.
+          </p>
 
-        <p
-          style={{
-            color: 'rgba(255,255,255,0.72)',
-            marginBottom: '24px',
-            lineHeight: 1.6,
-            fontSize: '12px',
-          }}
-        >
-           Select your travel duration and we’ll recommend a course that fits your schedule.
-        </p>
+          <div className="mt-8 space-y-4">
+            {durations.map((duration) => {
+              const isSelected = selectedDuration === duration;
 
-        <div
-          style={{
-            display: 'grid',
-            gap: '16px',
-          }}
-        >
-          {durationOptions.map((duration) => (
+              return (
+                <button
+                  key={duration}
+                  type="button"
+                  onClick={() => setSelectedDuration(duration)}
+                  className={`w-full rounded-2xl border px-5 py-5 text-left text-2xl font-semibold transition ${
+                    isSelected
+                      ? "border-white bg-white text-black"
+                      : "border-white/10 bg-white/5 text-white hover:border-white/30 hover:bg-white/10"
+                  }`}
+                >
+                  {duration}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 flex items-center justify-between">
             <button
-              key={duration}
-              onClick={() => handleSelectDuration(duration)}
-              style={{
-                padding: '20px',
-                borderRadius: '18px',
-                border: '1px solid rgba(255,255,255,0.12)',
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                color: 'white',
-                fontSize: '18px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                textAlign: 'left',
-              }}
+              type="button"
+              onClick={handleBack}
+              className="rounded-xl border border-white/15 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
             >
-              {duration}
+              Back
             </button>
-          ))}
+
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={!selectedDuration}
+              className={`rounded-xl px-5 py-3 text-sm font-semibold transition ${
+                selectedDuration
+                  ? "bg-white text-black hover:bg-gray-200"
+                  : "cursor-not-allowed bg-white/10 text-gray-500"
+              }`}
+            >
+              Next
+            </button>
+          </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }
