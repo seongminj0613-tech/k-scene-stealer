@@ -1,29 +1,72 @@
-Busan Travel Recommender
+# K-Drama Food Trip
 
-사용자의 여행 유형, 지역, 예산, 선호 태그를 바탕으로 부산 내 맞춤 장소를 추천하는 토이프로젝트입니다.
+K-Drama 기반 감성 여행 추천 서비스  
+드라마 속 장면을 따라 실제 장소와 음식, 문화를 경험할 수 있도록 연결하는 프로젝트입니다.
 
-프로젝트 개요
+---
 
-이 프로젝트는 부산 여행자를 위한 간단한 추천 MVP입니다.  
-사용자가 조건을 선택하면, 백엔드에서 더미 데이터(JSON)를 기반으로 규칙 기반 점수화를 수행하고 추천 결과를 반환합니다.
+##  프로젝트 개요
 
-주요 기능
+K-콘텐츠(K-Drama)를 통해 한국을 방문하는 외국인 관광객이 증가하고 있습니다.  
+하지만 실제 여행은 서울 중심의 관광으로 집중되며,  
+드라마 속 지역 감성과 음식, 생활 문화는 충분히 체험되지 못하는 문제가 있습니다.
 
-- 여행 유형 선택
-- 지역 선택
-- 예산 선택
-- 선호 태그 선택
-- 추천 점수 기반 장소 추천
-- 추천 이유(summary) 제공
+본 프로젝트는 이러한 문제를 해결하기 위해  
+**드라마 장면(Scene) 기반으로 장소, 음식, 카페, 문화 체험을 연결하는  
+감성 중심 여행 추천 서비스**를 구현하는 것을 목표로 합니다.
 
-기술 스택
+---
+##  핵심 아이디어
 
-- Frontend: Next.js
-- Backend: FastAPI
-- Data: JSON
-- Recommendation Logic: Rule-based scoring
+“드라마를 보는 경험을, 실제 여행 경험으로 확장한다”
 
-폴더 구조
+- Scene 기반 UX (장면 선택 중심)
+- 드라마 감성 → 장소 → 음식 → 체험 연결
+- 단순 추천이 아닌 **스토리 기반 여행 경험 제공**
+
+---
+
+## 🚀 주요 기능
+
+### 1. Scene 기반 여행 추천
+- 드라마 장면 선택 (감성 중심)
+- 장면과 연결된 지역 자동 매핑
+
+### 2. 위치 기반 추천 시스템
+- 촬영지 또는 유사 지역 제공
+- 지도 기반 장소 시각화
+
+### 3. 식도락 여행 연결
+- 🍜 음식 추천
+- ☕ 카페 추천
+- 📸 포토 스팟
+- 🎭 문화 체험
+
+### 4. 추천 이유 제공
+- 선택 조건 기반 추천 이유 설명
+- 사용자 맞춤형 경험 제공
+
+---
+
+## AI 적용 (확장 기능)
+
+- 장면 기반 여행 설명 생성 (AI Guide)
+- 추천 이유 자동 생성
+- 사용자 선택 기반 인터랙션 (Food / Cafe / Experience)
+
+---
+
+##  기술 스택
+
+- **Frontend**: Next.js
+- **Backend**: FastAPI
+- **Data**: JSON
+- **Recommendation Logic**: Rule-based Scoring
+- **(확장 예정)**: Generative AI (Claude, GPT)
+
+---
+
+## 프로젝트 구조
 
 ```bash
 busan-travel-recommender/
@@ -38,49 +81,3 @@ busan-travel-recommender/
 │  ├─ package.json
 │  └─ tsconfig.json
 └─ .gitignore
-
-##  서비스 링크
-
-👉 https://busan-travel-recommender-buf3.vercel.app
-
-## 실행 방법
-
-프론트엔드와 백엔드는 각각 별도 터미널에서 동시에 실행해야 합니다.
-
-### Backend 실행
-
-```bash
-cd backend
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install fastapi uvicorn pydantic
-uvicorn main:app --reload
-
-### Frontend 실행
-
-cd frontend
-npm install
-npm run dev
-
-## 배포 및 협업 계획
-- Git Flow 기반으로 브랜치 전략을 사용합니다.
-- 기능 단위 작업 후 Pull Request를 통해 main 브랜치에 반영합니다.
-- 추후 퍼블릭 배포 링크를 연결할 예정입니다.
-
-## 보안 설정
-- API Key는 환경변수로 관리
-- .env 파일은 Git에 포함하지 않음
-- CORS 정책 적용 예정
-- HTTPS 기반 배포 예정
-
-## 배포 링크
-https://busan-travel-recommender-buf3.vercel.app
-
-## 현재 상태
-- 프론트엔드는 Vercel을 통해 배포 완료
-- 백엔드는 로컬 환경에서 실행 중
-- 배포 환경에서는 백엔드 미연결 상태로 일부 기능 제한 존재
-
-## 향후 계획
-- FastAPI 백엔드 클라우드 배포 예정
-- 프론트엔드와 API 연동 예정
