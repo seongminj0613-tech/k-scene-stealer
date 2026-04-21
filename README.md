@@ -1,4 +1,4 @@
-# k-scene-stealer
+# K-scene-stealer
 
 한국 드라마를 기반으로 한 체험형 여행 추천 에이전트 
 
